@@ -1,0 +1,4 @@
+apache-beam[gcp]==2.53.0  # Verifique a versão mais atual
+google-cloud-storage
+google-cloud-pubsub
+# Adicione outras dependências do seu script aqui (pandas, scikit-learn, etc.)

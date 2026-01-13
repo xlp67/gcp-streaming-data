@@ -1,0 +1,27 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'dataflow'
+      - 'flex-template'
+      - 'build'
+      - 'gs://${_BUCKET_TEMPLATES}/templates/streaming-pipeline.json'
+      - '--image-gcr-path'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/dataflow-image:latest'
+      - '--sdk-language'
+      - 'PYTHON'
+      - '--flex-template-base-image'
+      - 'PYTHON3'
+      - '--py-path'
+      - '.'
+      - '--env'
+      - 'FLEX_TEMPLATE_PYTHON_PY_FILE=src/main.py'
+      - '--env'
+      - 'FLEX_TEMPLATE_PYTHON_REQUIREMENTS_FILE=requirements.txt'
+
+substitutions:
+  _BUCKET_TEMPLATES: "seu-bucket-de-templates"
+  _REGION: "us-central1"
+  _REPO_NAME: "seu-repositorio-docker"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
